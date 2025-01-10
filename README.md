@@ -8,6 +8,10 @@ NORD: Norwegian geospatial Object Reconstruction Dataset - FKB edition
 
 The Miro-board (pass: kartai1234) is here: https://miro.com/app/board/uXjVL5KvO8Q=/?share_link_id=695142389210
 
+# Project Google Drive folder
+
+https://drive.google.com/drive/folders/12oujXtB8r6a6xlx8Ronij_WT-fdcRiz0?usp=drive_link
+
 # Goals
 1. Develop a public / open State-of-the-art benchmark dataset for Norwegian aerial images and precise map data (FKB)
 * Based on the open GeoVekst research data (7 areas à ~3km^2)
