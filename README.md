@@ -42,6 +42,14 @@ https://drive.google.com/drive/folders/12oujXtB8r6a6xlx8Ronij_WT-fdcRiz0?usp=dri
 
 # Task list
 
+**Notes: Jan 24th: Data-access and preparation**
+* [Marianne] works on QA on FKB-datasets
+* Stavanger agrees to MIT license dataset
+* [Ben] almost finished developing coco-support in FYSAK. Needs to be tested. 
+* [Aditya] Surveyed some research articles. Works further on state-of-the-art
+* [Ivar] works further on image matching technique for true ortophoto generation
+* [Alex] push further on Bergen to release a dataset
+
 **Notes: January 10th: Data-access**
 
 * [Ben] Upload ortophotos with FKB polygons to the Github-repo
@@ -54,19 +62,18 @@ https://drive.google.com/drive/folders/12oujXtB8r6a6xlx8Ronij_WT-fdcRiz0?usp=dri
 
 **Milestone: January 30th: Data-access**
 
-* [Alex] Github repo
-* [Marianne]: Share some samples of: true orthophotos, regular orthophotos, FKB-objects (surface/polygons)
+* ~~[Alex] Github repo~~
+* ~~[Marianne]: Share some samples of: true orthophotos, regular orthophotos, FKB-objects (surface/polygons)~~
 * [Aditya] Research state-of-the-art for benchmarks on object detection and segmentation of aerial imagery
-* [Ivar] Get access to the open data
+* [Aditya] Statistics and analysis of the dataset
+* ~~[Ivar] Get access to the open data~~
    * 7 regions in Norway
    * Ortophotos, FKB-data as geojson/gml,
-* [Ivar] Generate true orthophotos
-* [Ben] Create segmentation labels from the FKB-objects in image coordinate system (masks)
+* [Ivar] Generate true orthophotos using image matching
+* [Ben] Create coco-format segmentation labels from the FKB-objects in image coordinate system (masks)
 * [Marianne -> Ben / Sander] Create object detection labels (bbox) from the FKB-objects
    * Oriented bounding boxes - yolo11??
    * Coco-format / Yolo text format
-* [Aditya] Statistics and analysis of the dataset
-
 
  **Milestone: February 27th: Evaluation framework**
 
