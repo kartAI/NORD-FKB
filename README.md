@@ -42,6 +42,17 @@ https://drive.google.com/drive/folders/12oujXtB8r6a6xlx8Ronij_WT-fdcRiz0?usp=dri
 
 # Task list
 
+**Notes: 13th februar**
+* [Marianne]: The vector data is last updated in one single project. And does not match with the newest imagery. 
+   * Possible to split the vector data to the matching image?
+   * Goal: To find the best matching image for the (subset) vector data
+   * Ben: would need to change the production routine (FYSAK) to a postgis/vector data from "Marianne"
+* [Aditya]: Test the COCO labels and image from the FYSAK production (drive folder)
+* [Aditya]: Read several papers, one very good with github repo. Will sync with Sander on further work
+* [Ivar]: Image matching from point clouds is probably not good enough.
+* [Alex]: Bergen agreed to release an area under MIT license. 
+
+
 **Notes: Jan 24th: Data-access and preparation**
 * [Marianne] works on QA on FKB-datasets
 * Stavanger agrees to MIT license dataset
