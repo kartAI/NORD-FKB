@@ -42,6 +42,14 @@ https://drive.google.com/drive/folders/12oujXtB8r6a6xlx8Ronij_WT-fdcRiz0?usp=dri
 
 # Task list
 
+**Notes: 9th april**
+* [Sander]: 
+   * Make two notebooks (object detection and segmentation) that demonstrates benchmarking a model on the dataset
+   * Deadline 9th May
+* [Marianne, Ben, Ivar]: 
+   * Todo: produce complete data set with quality report per area/data region 
+   * Deadline 9th May
+
 **Notes: 13th februar**
 * [Marianne]: The vector data is last updated in one single project. And does not match with the newest imagery. 
    * Possible to split the vector data to the matching image?
