@@ -1,0 +1,3 @@
+This folder contains Jupiter note book code to check Missing files and Mask. 
+In order to run the code just put folder name and rest is same. Give the folder names inside it is 'Mask, Image_rgb, Metadata.json and coco_dataset.json'
+After running Excell file is created which will store the missing data.
