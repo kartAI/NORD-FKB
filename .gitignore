@@ -126,3 +126,6 @@ venv.bak/
 
 # Pyre type checker
 .pyre/
+
+
+benchmarking_tutorial/data
