@@ -2,3 +2,6 @@ This folder contains Jupiter note book code to check Missing files and Mask.
 In order to run the code just put folder name and rest is same. Give the folder names inside it is 'Mask, Image_rgb, Metadata.json and coco_dataset.json'
 After running Excell file is created which will store the missing data.
 Excell File is also added
+
+
+City_annotation.xls: This file details regarding the number of annotations per class for each city.
