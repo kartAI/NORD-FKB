@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NORD-FKB Dataset</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>NORD-FKB: A Large-scale Dataset for Instance Segmentation in Aerial Images</h1>
+        <nav>
+            <ul>
+                <li><a href="#home" class="tab-link active" data-tab="home">Home</a></li>
+                <li><a href="#dataset" class="tab-link" data-tab="dataset">Dataset</a></li>
+                <li><a href="#devkit" class="tab-link" data-tab="devkit">Development Kit</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div id="news" class="tab-content active">
+            <h2>News</h2>
+            <ul>
+                <li><strong>2024-03-20</strong> Initial release of the dataset.</li>
+                <li><strong>2024-03-19</strong> Website launched.</li>
+            </ul>
+
+            <section class="overview">
+                <h2>Overview</h2>
+                <p>
+                    NORD-FKB is a large-scale dataset for instance segmentation in aerial images, 
+                    specifically designed for forest knowledge base applications. The dataset contains 
+                    high-resolution aerial images with precise instance-level annotations, making it 
+                    an ideal benchmark for developing and evaluating instance segmentation algorithms 
+                    in forest environments.
+                </p>
+            </section>
+
+            <section class="key-features">
+                <h2>Key Features</h2>
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <h3>Scale</h3>
+                        <p>Large number of high-resolution images covering diverse forest landscapes</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>Categories</h3>
+                        <p>Multiple important forest-related categories with precise annotations</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>Quality</h3>
+                        <p>Professional annotations with expert validation and quality control</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>Diversity</h3>
+                        <p>Various object scales, orientations, and environmental conditions</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="quick-links">
+                <h2>Quick Links</h2>
+                <div class="links-grid">
+                    <a href="#dataset" class="quick-link-item">
+                        <h3>Dataset</h3>
+                        <p>Explore the dataset structure and download options</p>
+                    </a>
+                    <a href="#devkit" class="quick-link-item">
+                        <h3>Development Kit</h3>
+                        <p>Get started with our evaluation tools and documentation</p>
+                    </a>
+                    <a href="#citation" class="quick-link-item">
+                        <h3>Citation</h3>
+                        <p>Cite our dataset in your research</p>
+                    </a>
+                </div>
+            </section>
+        </div>
+
+        <div id="dataset" class="tab-content">
+            <h2>Dataset</h2>
+            <section id="description">
+                <h3>Description</h3>
+                <p>
+                    NORD-FKB is a comprehensive benchmark dataset for instance segmentation in aerial images. 
+                    This large-scale and densely annotated dataset contains multiple object instances across 
+                    various categories in high-resolution images. The distinctive characteristics of NORD-FKB include:
+                </p>
+                <ul>
+                    <li>Large number of high-resolution images</li>
+                    <li>Multiple important and commonly occurring categories</li>
+                    <li>Large number of instances per category</li>
+                    <li>Significant object scale variation</li>
+                    <li>Real-world aerial conditions with varying object orientations</li>
+                    <li>Precise instance-level annotations</li>
+                </ul>
+            </section>
+
+            <section id="examples">
+                <h3>Examples of Annotated Images</h3>
+                <div class="image-gallery">
+                    <!-- Add your example images here -->
+                    <div class="image-container">
+                        <img src="images/placeholder1.jpg" alt="Example 1">
+                        <p>Example 1</p>
+                    </div>
+                    <div class="image-container">
+                        <img src="images/placeholder2.jpg" alt="Example 2">
+                        <p>Example 2</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div id="devkit" class="tab-content">
+            <h2>Development Kit</h2>
+            <section id="download">
+                <h3>Download</h3>
+                <p>Download the development kit and dataset here.</p>
+                <!-- Add download links here -->
+            </section>
+
+            <section id="usage">
+                <h3>Usage</h3>
+                <p>Instructions for using the development kit will be provided here.</p>
+            </section>
+        </div>
+
+        <section id="citation">
+            <h2>Citation</h2>
+            <p>If you make use of the NORD-FKB dataset, please cite our paper:</p>
+            <pre>
+@article{your-paper-2024,
+    title={NORD-FKB: A Large-scale Dataset for Instance Segmentation in Aerial Images},
+    author={Your Name and Co-authors},
+    journal={Your Journal},
+    year={2024}
+}
+            </pre>
+        </section>
+
+        <section id="contact">
+            <h2>Contact</h2>
+            <p>If you encounter any problems or have feedback, please contact:</p>
+            <ul>
+                <li>Your Name at <a href="mailto:your.email@example.com">your.email@example.com</a></li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 NORD-FKB Dataset. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabLinks = document.querySelectorAll('.tab-link');
+            const tabContents = document.querySelectorAll('.tab-content');
+
+            tabLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Remove active class from all links and contents
+                    tabLinks.forEach(l => l.classList.remove('active'));
+                    tabContents.forEach(c => c.classList.remove('active'));
+                    
+                    // Add active class to clicked link and corresponding content
+                    this.classList.add('active');
+                    const tabId = this.getAttribute('data-tab');
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html> 
