@@ -3,8 +3,6 @@ from pycocotools.cocoeval import COCOeval
 from pycocotools import mask as maskUtils
 import numpy as np
 import torch
-import os
-import cv2
 
 def prepare_coco_format(predictions, image_ids):
     """
