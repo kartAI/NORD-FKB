@@ -5,6 +5,7 @@ import seaborn as sns
 from pycocotools.coco import COCO
 from collections import Counter, defaultdict
 import pandas as pd
+import argparse
 
 def analyze_dataset(ann_file):
     """Analyze COCO format dataset and return statistics."""
@@ -141,7 +142,7 @@ def plot_statistics(stats, output_dir='stats'):
     print(f"Total Annotations: {stats['n_annotations']}")
     print(f"Average Annotations per Image: {stats['n_annotations'] / stats['n_images']:.2f}")
 
-def create_latex_table(stats):
+def create_latex_table(stats, dataset_name="Ours"):
     """Create a LaTeX table with dataset statistics."""
     latex_str = """
 \\begin{table}[h]
@@ -150,32 +151,60 @@ def create_latex_table(stats):
 \\hline
 Dataset & Categories & Instances & Images & Instances/Image \\\\
 \\hline
-Ours & %d & %d & %d & %.1f \\\\
+%s & %d & %d & %d & %.1f \\\\
 \\hline
 \\end{tabular}
 \\caption{Dataset Statistics}
 \\label{tab:dataset_stats}
 \\end{table}
 """ % (
+        dataset_name,
         stats['n_categories'],
         stats['n_annotations'],
         stats['n_images'],
         stats['n_annotations'] / stats['n_images']
     )
     
-    with open('dataset_stats_table.tex', 'w') as f:
+    with open(f'{dataset_name.lower()}_stats_table.tex', 'w') as f:
         f.write(latex_str)
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Analyze COCO format dataset")
+    parser.add_argument(
+        "--data-dir", 
+        default="data/20250507_NORD_FKB_Som_Korrigert",
+        help="Dataset directory containing coco_dataset.json (default: data/20250507_NORD_FKB_Som_Korrigert)"
+    )
+    parser.add_argument(
+        "--output-dir", 
+        default="stats",
+        help="Output directory for statistics and plots (default: stats)"
+    )
+    parser.add_argument(
+        "--dataset-name", 
+        default="Original",
+        help="Name of the dataset for LaTeX table (default: Original)"
+    )
+    
+    args = parser.parse_args()
+    
     # Dataset path
-    data_dir = 'data/20250507_NORD_FKB_Som_Korrigert'
-    ann_file = os.path.join(data_dir, 'coco_dataset.json')
+    ann_file = os.path.join(args.data_dir, 'coco_dataset.json')
+    
+    if not os.path.exists(ann_file):
+        print(f"Error: Annotation file not found: {ann_file}")
+        exit(1)
+    
+    print(f"Analyzing dataset: {args.data_dir}")
+    print(f"Output directory: {args.output_dir}")
+    print(f"Dataset name: {args.dataset_name}")
+    print("=" * 60)
     
     # Analyze dataset
     stats = analyze_dataset(ann_file)
     
     # Create visualizations
-    plot_statistics(stats)
+    plot_statistics(stats, args.output_dir)
     
     # Create LaTeX table
-    create_latex_table(stats) 
+    create_latex_table(stats, args.dataset_name) 
