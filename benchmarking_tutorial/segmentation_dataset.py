@@ -13,6 +13,11 @@ class COCOSegmentationDataset(Dataset):
         self.img_ids = self.coco.getImgIds()
         self.transform = transform
         self.mask_dir = os.path.join(data_dir, 'Mask')
+        
+        # Create mapping from COCO category IDs to consecutive class indices
+        self.cat_ids = sorted(self.coco.getCatIds())
+        self.id_to_class = {cat_id: idx for idx, cat_id in enumerate(self.cat_ids)}
+        self.num_classes = len(self.cat_ids)
 
     def __len__(self):
         return len(self.img_ids)
@@ -34,13 +39,19 @@ class COCOSegmentationDataset(Dataset):
         # Iterate over each annotation to load and overlay the mask
         for ann_idx, ann in enumerate(anns):
             category_name = self.coco.loadCats(ann['category_id'])[0]['name']
-            mask_filename = f"{img_info['file_name'].replace('.tif', '')}-{ann_idx}-{category_name}.tif".replace("Image_rgb/", "")
+            # Extract the base filename: remove Image_rgb/ prefix and .tif extension
+            base_filename = img_info['file_name'].replace('Image_rgb/', '').replace('.tif', '')
+            # Remove the Image_rgb part from the filename itself and fix double underscores
+            base_filename = base_filename.replace('Image_rgb', '').replace('__', '_')
+            mask_filename = f"{base_filename}-{ann_idx}-{category_name}.tif"
             mask_path = os.path.join(self.mask_dir, mask_filename)
             
             # Load mask
             ann_mask = cv.imread(mask_path, cv.IMREAD_GRAYSCALE)
             if ann_mask is not None:
-                mask[ann_mask > 0] = ann['category_id']
+                # Map COCO category ID to consecutive class index
+                class_idx = self.id_to_class[ann['category_id']]
+                mask[ann_mask > 0] = class_idx
 
         # Apply transformations
         if self.transform:

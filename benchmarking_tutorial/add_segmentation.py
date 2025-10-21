@@ -31,8 +31,10 @@ def add_segmentation_to_annotations(json_path, data_dir):
             category_name = next(cat['name'] for cat in data['categories'] if cat['id'] == ann['category_id'])
             
             # Construct mask filename using annotation index
-            mask_filename = f"{img_info['file_name'].replace('.tif', '')}-{ann_idx}-{category_name}.tif".replace("Image_rgb/", "")
-            mask_path = os.path.join(mask_dir, mask_filename)
+            # Remove "Image_rgb/" prefix and ".tif" extension from the image filename
+            base_filename = img_info['file_name'].replace("Image_rgb/", "").replace('.tif', '')
+            mask_filename = f"{base_filename}-{ann_idx}-{category_name}.tif"
+            mask_path = os.path.join(mask_dir, mask_filename).replace("Image_rgb_", "")
             
             # Load and encode mask
             if os.path.exists(mask_path):
@@ -60,7 +62,7 @@ def add_segmentation_to_annotations(json_path, data_dir):
 
 if __name__ == "__main__":
     # Path to your COCO dataset JSON file and data directory
-    json_path = '20250507_NORD_FKB_Som_Korrigert/coco_dataset.json'
-    data_dir = '20250507_NORD_FKB_Som_Korrigert'
+    json_path = 'data/combined_dataset/coco_dataset.json'
+    data_dir = 'data/combined_dataset'
     
     add_segmentation_to_annotations(json_path, data_dir) 

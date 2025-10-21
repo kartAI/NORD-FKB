@@ -26,15 +26,22 @@ class COCOObjectDetectionDataset(Dataset):
         ann_ids = self.coco.getAnnIds(imgIds=img_info['id'])
         anns = self.coco.loadAnns(ann_ids)
 
-        # Extract bounding boxes and labels
+        # Extract bounding boxes, labels, and segmentations
         bboxes = []
         labels = []
+        segmentations = []
         for ann in anns:
             bbox = ann['bbox']
             # Convert bbox from [x, y, width, height] to [x_min, y_min, x_max, y_max]
             bbox = [bbox[0], bbox[1], bbox[0] + bbox[2], bbox[1] + bbox[3]]
             bboxes.append(bbox)
             labels.append(ann['category_id'])
+            
+            # Load segmentation if available
+            if 'segmentation' in ann and ann['segmentation'] is not None:
+                segmentations.append(ann['segmentation'])
+            else:
+                segmentations.append(None)
 
         bboxes = torch.tensor(bboxes, dtype=torch.float32)
         labels = torch.tensor(labels, dtype=torch.int64)
@@ -43,7 +50,7 @@ class COCOObjectDetectionDataset(Dataset):
         if self.transform:
             image = self.transform(image)
 
-        return image, {'boxes': bboxes, 'labels': labels, 'image_id': img_id}
+        return image, {'boxes': bboxes, 'labels': labels, 'segmentations': segmentations, 'image_id': img_id}
 
 if __name__ == "__main__":
     # Define transformations

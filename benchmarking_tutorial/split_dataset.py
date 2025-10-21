@@ -232,11 +232,14 @@ def save_split_dataset(split_data, output_dir, source_dir, include_masks, split_
                 filename = img['file_name']
                 if filename.startswith('Image_rgb/'):
                     filename = filename.replace('Image_rgb/', '')
-                selected_filenames.add(filename.replace('.tif', ''))
+                # Extract the tile identifier (e.g., "2_tile-57-131" from "2_Image_rgb_tile-57-131.tif")
+                tile_id = filename.replace('Image_rgb_', '').replace('.tif', '')
+                selected_filenames.add(tile_id)
             
             mask_files_copied = 0
             for mask_file in source_mask_dir.glob('*.tif'):
                 mask_name = mask_file.stem
+                # Check if this mask belongs to any selected image
                 for selected_name in selected_filenames:
                     if mask_name.startswith(selected_name + '-'):
                         shutil.copy2(mask_file, output_mask_dir / mask_file.name)
@@ -258,8 +261,8 @@ def main():
     parser = argparse.ArgumentParser(description="Split the NORD-FKB dataset into train and validation sets")
     parser.add_argument(
         "--source-dir", 
-        default="data/20250507_NORD_FKB_Som_Korrigert",
-        help="Source dataset directory (default: data/20250507_NORD_FKB_Som_Korrigert)"
+        default="data/combined_dataset",
+        help="Source dataset directory (default: data/combined_dataset)"
     )
     parser.add_argument(
         "--train-output-dir", 
@@ -297,20 +300,34 @@ def main():
     
     args = parser.parse_args()
     
+    # Use relative paths from the script location
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    source_dir = os.path.join(script_dir, args.source_dir)
+    train_output_dir = os.path.join(script_dir, args.train_output_dir)
+    val_output_dir = os.path.join(script_dir, args.val_output_dir)
+    
     # Validate arguments
     if not 0 < args.train_ratio < 1:
         print("Error: train_ratio must be between 0 and 1")
         return
     
-    if not os.path.exists(args.source_dir):
-        print(f"Error: Source directory '{args.source_dir}' does not exist")
+    if not os.path.exists(source_dir):
+        print(f"Error: Source directory '{source_dir}' does not exist")
+        print("Please run combine_datasets.py first to create the combined dataset.")
+        return
+    
+    # Check if COCO file exists
+    coco_file = os.path.join(source_dir, "coco_dataset.json")
+    if not os.path.exists(coco_file):
+        print(f"Error: COCO dataset file not found at {coco_file}")
+        print("Please run combine_datasets.py first to create the combined dataset.")
         return
     
     # Split dataset
     split_dataset_balanced(
-        source_dir=args.source_dir,
-        train_output_dir=args.train_output_dir,
-        val_output_dir=args.val_output_dir,
+        source_dir=source_dir,
+        train_output_dir=train_output_dir,
+        val_output_dir=val_output_dir,
         train_ratio=args.train_ratio,
         random_seed=args.random_seed,
         include_masks=not args.no_masks,
